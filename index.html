@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>접근 제한 - 관리자 전용</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0f172a;
+        }
+        .error-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .shield-icon {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-6">
+
+    <div class="max-w-md w-full text-center">
+        <!-- Shield Icon -->
+        <div class="mb-8 flex justify-center">
+            <div class="shield-icon bg-red-500/10 p-5 rounded-full border border-red-500/20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="error-card p-8 rounded-2xl shadow-2xl">
+            <h1 class="text-2xl font-bold text-white mb-4">
+                접근이 거부되었습니다
+            </h1>
+            
+            <p class="text-slate-400 mb-6 leading-relaxed">
+                죄송하지만 여긴 접근할 수 없는 페이지입니다.<br>
+                이 페이지는 <span class="text-red-400 font-semibold text-nowrap underline underline-offset-4 decoration-red-500/30">관리자의 서버 페이지</span>이며 외부인은 접근을 할 수 없습니다.
+            </p>
+
+            <div class="space-y-3">
+                <a href="/" class="block w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition-all duration-200 ease-in-out transform active:scale-95">
+                    메인 페이지로 이동
+                </a>
+                <button onclick="window.history.back()" class="block w-full py-3 px-4 bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold rounded-xl transition-all">
+                    이전 화면으로
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <p class="text-slate-500 text-sm">
+                IP: 127.0.0.1 | Timestamp: <span id="time"></span>
+            </p>
+            <p class="text-slate-600 text-xs mt-2 uppercase tracking-widest font-mono">
+                System Security Protocol Active
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 현재 시간 표시용
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('time').innerText = now.toLocaleString();
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
